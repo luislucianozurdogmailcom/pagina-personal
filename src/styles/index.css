@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+    --color-dark: #171717;
+    --color-principalGreen: #20C20F;
+    --color-light: #E8E8E8;
+    --color-mediumGray: #9E9E9E;
+    --color-darkGreen: #0B8A01;
+    --color-lightGreen: #5FE951;
+    --color-accent1: #FF9D4D;
+    --color-accent2: #2D7A9C;
+}
+
+.transition-transform {
+    transition: transform 0.7s ease-in-out, opacity 0.7s ease;
+}
+
+
+@keyframes gradientFromShift {
+    0%, 100% {
+      --tw-gradient-from: #171717; /* violet-500 */
+      --tw-gradient-to: #171717; /* blue-500 */
+    }
+    50% {
+      --tw-gradient-from: #171717; /* red-300 */
+      --tw-gradient-to: #171717; /* blue-300 */
+    }
+  }
+  
+  .animate-gradient-from {
+    animation: gradientFromShift 2s ease-in-out infinite;
+  }
+  
