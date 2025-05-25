@@ -26,8 +26,8 @@ const Header = () => {
                         <a href="/about" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                             About me
                         </a>
-                        <a href="/labrary" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                            Labrary
+                        <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
+                            Library
                         </a>
                         <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                             Contact
@@ -67,8 +67,8 @@ const Header = () => {
                             <a href="/about" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                                 About me
                             </a>
-                            <a href="/labrary" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                                Labrary
+                            <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
+                                Library
                             </a>
                             <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                                 Contact

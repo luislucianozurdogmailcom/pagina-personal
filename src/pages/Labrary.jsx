@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+import PdfDownloadButton from "../components/labrary-components/PdfDownloadButton";
 
 const videos = [
     {
@@ -32,8 +34,17 @@ const videos = [
         thumbnail: "https://img.youtube.com/vi/f687hBjwFcM/hqdefault.jpg",
         url: "https://www.youtube.com/watch?v=f687hBjwFcM",
         tag: "Física",
-    },
+    }
     // Agrega más videos aquí si lo deseas
+];
+
+const PDFs = [
+    {
+        id: 1,
+        title: "Formulario de física - Nivel CBC",
+        fileName: "Formulario de física para el nivel CBC.",
+        fileUrl: "/Formularios/Fisica-CBC-Formulario.pdf",
+    }
 ];
 
 const Labrary = () => (
@@ -60,7 +71,17 @@ const Labrary = () => (
                     </div>
                 </a>
             ))}
+            {PDFs.map((pdf) => (
+                <PdfDownloadButton 
+                    key={pdf.id}
+                    fileUrl={pdf.fileUrl}
+                    fileName={pdf.fileName}
+                >
+                    {pdf.fileName}
+                </PdfDownloadButton>
+            ))}
         </div>
+
     </div>
 );
 

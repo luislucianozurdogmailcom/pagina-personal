@@ -25,10 +25,10 @@ const Footer = () => {
           <div className="space-y-4 flex flex-col items-center">
             <h3 className="text-xl pb-2 border-b-2 border-dark w-full">Enlaces</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-dark text-xs hover:text-accent2 transition duration-300">Inicio</a></li>
-              <li><a href="/proyectos" className="text-dark text-xs hover:text-accent2 transition duration-300">Proyectos</a></li>
-              <li><a href="/sobre-mi" className="text-dark text-xs hover:text-accent2 transition duration-300">Sobre Mí</a></li>
-              <li><a href="/contacto" className="text-dark text-xs hover:text-accent2 transition duration-300">Contacto</a></li>
+              <li><a href="/" className="text-dark text-xs hover:text-accent2 transition duration-300">Home</a></li>
+              <li><a href="/library" className="text-dark text-xs hover:text-accent2 transition duration-300">Library</a></li>
+              <li><a href="/about" className="text-dark text-xs hover:text-accent2 transition duration-300">About Me</a></li>
+              <li><a href="/contact" className="text-dark text-xs hover:text-accent2 transition duration-300">Contact</a></li>
             </ul>
           </div>
           
