@@ -60,11 +60,13 @@ const PrincipalText = () => {
                     href="https://wa.me/+541135621000" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="overflow-hidden flex items-center justify-center mt-4 text-accent1 border-2 border-rounded-xl |  hover:text-principalGreen transition duration-300 ease-in-out px-4 py-2 rounded-lg shadow-lg bg-gradient-to-l from-dark hover:from-violet-500 to-violet-700 hover:to-accent2"
+                    className="overflow-hidden col-span-2 flex items-center justify-center mt-4 text-accent1 border-2 border-rounded-xl |  hover:text-principalGreen transition duration-300 ease-in-out px-4 py-2 rounded-lg shadow-lg bg-gradient-to-l from-dark hover:from-violet-500 to-violet-700 hover:to-accent2"
                     >
                     <FaWhatsapp className="text-6xl mx-5 min-w-8" /> <span className='hidden lg:block'>¿Empezamos?</span>
                 </a>
-                <a 
+                {/*
+
+                    <a 
                     href="https://www.youtube.com/watch?v=DpRC2Bo3T6c&ab_channel=LucianoZurdo" 
                     target="_blank" 
                     rel="noopener noreferrer" 
@@ -72,6 +74,7 @@ const PrincipalText = () => {
                     >
                     <FaYoutube className="text-6xl mx-5  min-w-8" /> <span className='hidden lg:block'>Te cuento un poco</span>
                 </a>
+                */}
             </div>
         </div>
     );

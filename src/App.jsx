@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Labrary from './pages/Labrary'
 import Contact from './pages/Contact'
+import Tools from './pages/Tools'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/library" element={<Labrary />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/tools" element={<Tools />} />
           </Routes>
         </main>
         <Footer />

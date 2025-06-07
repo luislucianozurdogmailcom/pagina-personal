@@ -29,6 +29,9 @@ const Header = () => {
                         <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                             Library
                         </a>
+                        <a href="/tools" className="text-gray-300 hover:text-accent1 text-xs font-sans">
+                            Tools
+                        </a>
                         <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                             Contact
                         </a>
@@ -69,6 +72,9 @@ const Header = () => {
                             </a>
                             <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                                 Library
+                            </a>
+                            <a href="/tools" className="text-gray-300 hover:text-accent1 text-xs font-sans">
+                                Tools
                             </a>
                             <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
                                 Contact

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import PdfDownloadButton from "../components/labrary-components/PdfDownloadButton";
 
-const videos = [
+/*const videos = [
     {
         id: 1,
         title: "Segunda Ley de Newton - Fuerzas y Movimiento",
@@ -36,7 +36,7 @@ const videos = [
         tag: "Física",
     }
     // Agrega más videos aquí si lo deseas
-];
+];*/
 
 const PDFs = [
     {
@@ -44,14 +44,20 @@ const PDFs = [
         title: "Formulario de física - Nivel CBC",
         fileName: "Formulario de física para el nivel CBC.",
         fileUrl: "/Formularios/Fisica-CBC-Formulario.pdf",
+    },
+    {
+        id: 2,
+        title: "1er Parcial de física - Nivel CBC",
+        fileName: "Parcial n°1 de física nivel CBC.",
+        fileUrl: "/Parciales/parcial-1-fisica-cbc.pdf",
     }
 ];
 
 const Labrary = () => (
     <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-100 bg-accent1 p-2 text-center ">Biblioteca Gráfica</h1>
+        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-100 bg-accent1 p-2 text-center ">Biblioteca Informativa</h1>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {videos.map((video) => (
+            {/*videos.map((video) => (
                 <a
                     key={video.id}
                     href={video.url}
@@ -70,7 +76,7 @@ const Labrary = () => (
                         <p className="text-stone-600 text-sm font-sans flex-1 text-center">{video.description}</p>
                     </div>
                 </a>
-            ))}
+            ))*/}
             {PDFs.map((pdf) => (
                 <PdfDownloadButton 
                     key={pdf.id}
