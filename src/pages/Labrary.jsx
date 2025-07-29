@@ -50,6 +50,12 @@ const PDFs = [
         title: "1er Parcial de física - Nivel CBC",
         fileName: "Parcial n°1 de física nivel CBC.",
         fileUrl: "/Parciales/parcial-1-fisica-cbc.pdf",
+    },
+    {
+        id: 3,
+        title: "1er Parcial de física - Nivel CBC",
+        fileName: "Parcial n°1 de física nivel CBC",
+        fileUrl: "/Parciales/parcial_fisica_cbc.pdf",
     }
 ];
 

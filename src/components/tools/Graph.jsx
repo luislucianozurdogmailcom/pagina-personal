@@ -4,10 +4,10 @@ import * as math from 'mathjs';
 
 const Graph = () => {
   // Estado para la función y sus parámetros
-  const [functionType, setFunctionType] = useState('quadratic');
-  const [functionText, setFunctionText] = useState('x^2');
+  const [functionType, setFunctionType] = useState('custom');
+  const [functionText, setFunctionText] = useState('x^2+sin(5*x)+1');
   const [parameters, setParameters] = useState({ a: 1, b: 0, c: 0 });
-  const [range, setRange] = useState({ min: -10, max: 10 });
+  const [range, setRange] = useState({ min: -5, max: 5 });
   const [plotData, setPlotData] = useState([]);
 
   // Recalcular puntos cuando cambien los parámetros
@@ -29,7 +29,7 @@ const Graph = () => {
       let yValues;
       let displayFunction;
       const { a, b, c } = parameters;
-      
+      /* 
       if (functionType === 'quadratic') {
         yValues = xValues.map(x => a * x * x + b * x + c);
         displayFunction = `${a}x² + ${b}x + ${c}`;
@@ -37,13 +37,14 @@ const Graph = () => {
         yValues = xValues.map(x => b * x + c);
         displayFunction = `${b}x + ${c}`;
       } else {
-        // Función personalizada
-        yValues = xValues.map(x => {
-          const scope = { x };
-          return math.evaluate(functionText, scope);
-        });
+      */
+      // Función personalizada
+      yValues = xValues.map(x => {
+        const scope = { x };
+      return math.evaluate(functionText, scope);
+      });
         displayFunction = functionText;
-      }
+      //}
       
       setPlotData([{
         x: xValues,
@@ -71,6 +72,8 @@ const Graph = () => {
       <h2 className="text-2xl font-bold mb-4 text-stone-100 text-center">Graficador de Funciones</h2>
       
       {/* Selector de tipo de función */}
+      {/*
+
       <div className="mb-4">
         <label className="block text-stone-100 mb-2">Tipo de función:</label>
         <div className="flex space-x-4">
@@ -94,9 +97,12 @@ const Graph = () => {
           </button>
         </div>
       </div>
+      */}
       
       {/* Controles según el tipo de función */}
+      
       {functionType === 'custom' ? (
+      
         <div className="mb-4">
           <label className="block text-stone-100 mb-2">Función f(x) =</label>
           <input
@@ -154,7 +160,7 @@ const Graph = () => {
           <input
             type="number"
             value={range.min}
-            onChange={(e) => setRange(prev => ({ ...prev, min: parseFloat(e.target.value) || -10 }))}
+            onChange={(e) => setRange(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))}
             className="w-full p-2 border rounded text-stone-100"
           />
         </div>
@@ -163,7 +169,7 @@ const Graph = () => {
           <input
             type="number"
             value={range.max}
-            onChange={(e) => setRange(prev => ({ ...prev, max: parseFloat(e.target.value) || 10 }))}
+            onChange={(e) => setRange(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))}
             className="w-full p-2 border rounded text-stone-100"
           />
         </div>
