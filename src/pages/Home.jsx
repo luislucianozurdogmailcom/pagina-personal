@@ -33,6 +33,13 @@ const Home = () => {
   
   const enseñanza = [
     {
+      title: 'Materias Universitarias',
+      items: [
+        { name: 'Física', icon: FaReact, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Física! Por favor dejame información sobre horarios y modalidades', isActive: true},
+        { name: 'Matemáticas', icon: FaSquareRootAlt, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Matemáticas! Por favor dejame información sobre horarios y modalidades', isActive: true },
+      ],
+    },
+    {
       title: 'Lenguajes de programación',
       items: [
         { name: 'C++', icon: FaCuttlefish, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Cpp! Por favor dejame información sobre horarios y modalidades', isActive: true},
@@ -43,16 +50,8 @@ const Home = () => {
     {
       title: 'Data',
       items: [
-        { name: 'IA', icon: FaRobot, link: 'https://wa.me/+541135621000?text=Hola quiero aprender IA! Por favor dejame información sobre horarios y modalidades', isActive: true},
         { name: 'Big Data', icon: FaSatellite, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Big Data! Por favor dejame información sobre horarios y modalidades', isActive: true },
         { name: 'SQL', icon: FaDatabase, link: 'https://wa.me/+541135621000?text=Hola quiero aprender SQL! Por favor dejame información sobre horarios y modalidades', isActive: true },
-      ],
-    },
-    {
-      title: 'Materias Universitarias',
-      items: [
-        { name: 'Física', icon: FaReact, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Física! Por favor dejame información sobre horarios y modalidades', isActive: true},
-        { name: 'Matemáticas', icon: FaSquareRootAlt, link: 'https://wa.me/+541135621000?text=Hola quiero aprender Matemáticas! Por favor dejame información sobre horarios y modalidades', isActive: true },
       ],
     }
   ];
@@ -66,13 +65,6 @@ const Home = () => {
       ],
     },
 
-    {
-      title: 'IA',
-      items: [
-        { name: 'Machine Learning', icon: FaDatabase, link:'', isActive: false },
-        { name: 'Ciencia de Datos', icon: FaChartBar, link:'', isActive: false },
-      ],
-    },
 
     {
       title: 'CFD (Computational Fluids Dynamics)',
