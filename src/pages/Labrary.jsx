@@ -41,18 +41,36 @@ import PdfDownloadButton from "../components/labrary-components/PdfDownloadButto
 const PDFs = [
     {
         id: 1,
-        title: "Formulario de física - Nivel CBC",
-        fileName: "Formulario de física para el nivel CBC.",
-        fileUrl: "/Formularios/Fisica-CBC-Formulario.pdf",
+        title: "Física - Nivel CBC - Cinemática",
+        fileName: "Física - Nivel CBC - Cinemática",
+        fileUrl: "/Formularios/Formulario_Cinemática.pdf",
     },
     {
         id: 2,
+        title: "Física - Estática",
+        fileName: "Física - Estática",
+        fileUrl: "/Formularios/Formulario_Estatica.pdf",
+    },
+    {
+        id: 3,
+        title: "Física - Dinámica",
+        fileName: "Física - Dinámica",
+        fileUrl: "/Formularios/Formulario_dinámica.pdf",
+    },
+    {
+        id: 4,
+        title: "Física - Trabajo y Energía",
+        fileName: "Física - Trabajo y Energía",
+        fileUrl: "/Formularios/Formulario_dinámica.pdf",
+    },
+    {
+        id: 5,
         title: "1er Parcial de física - Nivel CBC",
         fileName: "Parcial n°1 de física nivel CBC.",
         fileUrl: "/Parciales/parcial-1-fisica-cbc.pdf",
     },
     {
-        id: 3,
+        id: 6,
         title: "1er Parcial de física - Nivel CBC",
         fileName: "Parcial n°1 de física nivel CBC",
         fileUrl: "/Parciales/parcial_fisica_cbc.pdf",
