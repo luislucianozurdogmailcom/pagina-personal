@@ -44,8 +44,8 @@ const Contact = () => (
                 >
                     {method.icon}
                     <div>
-                        <div className="text-lg font-semibold text-slate-700">{method.title}</div>
-                        <div className="text-stone-700">{method.value}</div>
+                        <div className="lg:text-lg text-sm font-semibold text-slate-700">{method.title}</div>
+                        <div className="lg:text-lg text-sm text-stone-700">{method.value}</div>
                     </div>
                 </a>
             ))}

@@ -10,7 +10,7 @@ const PrincipalText = () => {
     `;
 
     const fullText2 = `
-    Tanto si necesitas aprender algo, como si quieres que te ayude a resolver un problema relacionado con las tecnologías que conozco 
+    Tanto si necesitas aprender algo, como si queres que te ayude a resolver un problema relacionado con las tecnologías que conozco 
     o necesitas alguna solución a medida, no dudes en contactarme.
     Estoy acá para ayudarte a alcanzar tus objetivos y resolver tus dudas.
     `;

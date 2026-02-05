@@ -6,14 +6,11 @@ const PrincipalText = () => {
     const [text2, setText2] = useState('');
 
     const fullText2 = `
-    Soy un Ingeniero, investigador y apasionado por la enseñanza. Actualmente haciendo un PhD en Ciencia y Tecnología. 
-    
-    Cuento con experiencia en empresas como Mercado Libre SRL, Datalytics y organismos gubernamentales 
-    como el Ministerio de Educación (CABA) en donde desarrollé habilidades orientadas a Data desde roles como Analista e Ingeniero de datos.
+    Soy Ingeniero Electromecánico, investigador de CONICET y actualmente curso mi Doctorado en Ciencia y Tecnología. Mi carrera me ha llevado por empresas como Mercado Libre y Datalytics, pero mi verdadera vocación está en las aulas.
 
-    En paralelo hace 5 años trabajo desarrollando simulaciones numéricas con códigos propios y utilizando 
-    OpenFOAM (Software de simulación de fenómenos físicos con el método de volumenes finitos), asi como también trabajando paralelamente en el tratamiento de datos involucrando
-    técnicas de Machine Learning y Data Science.
+Con más de 5 años de experiencia docente —desde clases de Física 1 hasta la cátedra de Automatización Avanzada—, mi objetivo es que dejes de memorizar fórmulas y empieces a entender la lógica detrás de los problemas. Mi paso por la industria y la investigación me permite darte ejemplos reales de cómo se aplica lo que estudiamos en el mundo del Machine Learning, la Simulación Numérica (OpenFOAM) y el Análisis de Datos.
+
+En mis clases, combinamos el rigor académico con las herramientas digitales que hoy exige la profesión.
     `;
 
     useEffect(() => {
