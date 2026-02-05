@@ -38,7 +38,7 @@ import PdfDownloadButton from "../components/labrary-components/PdfDownloadButto
     // Agrega más videos aquí si lo deseas
 ];*/
 
-const PDFs = [
+const PDFs_formularios = [
     {
         id: 1,
         title: "Física - Nivel CBC - Cinemática",
@@ -65,21 +65,36 @@ const PDFs = [
     },
     {
         id: 5,
+        title: "Matemática - Vectores",
+        fileName: "Matemática - Vectores",
+        fileUrl: "/Formularios/Formulario_Vectores.pdf",
+    },
+    {
+        id: 6,
+        title: "Matemática - Identidades Trigonométricas",
+        fileName: "Matemática - Identidades Trigonométricas",
+        fileUrl: "/Formularios/Formulario_IdentidadesTrigonometricas.pdf",
+    }
+];
+
+const PDFs_parciales = [
+    {
+        id: 1,
         title: "1er Parcial de física - Nivel CBC",
         fileName: "Parcial n°1 de física nivel CBC.",
         fileUrl: "/Parciales/parcial-1-fisica-cbc.pdf",
     },
     {
-        id: 6,
+        id: 2,
         title: "1er Parcial de física - Nivel CBC",
         fileName: "Parcial n°1 de física nivel CBC",
         fileUrl: "/Parciales/parcial_fisica_cbc.pdf",
     }
-];
+]
 
 const Labrary = () => (
     <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-100 bg-accent1 p-2 text-center ">Biblioteca Informativa</h1>
+        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-900 bg-accent1 p-2 text-center ">Formularios</h1>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {/*videos.map((video) => (
                 <a
@@ -101,7 +116,7 @@ const Labrary = () => (
                     </div>
                 </a>
             ))*/}
-            {PDFs.map((pdf) => (
+            {PDFs_formularios.map((pdf) => (
                 <PdfDownloadButton 
                     key={pdf.id}
                     fileUrl={pdf.fileUrl}
@@ -112,6 +127,18 @@ const Labrary = () => (
             ))}
         </div>
 
+        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-900 bg-accent1 p-2 text-center ">Parciales Resueltos</h1>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            {PDFs_parciales.map((pdf) => (
+                <PdfDownloadButton 
+                    key={pdf.id}
+                    fileUrl={pdf.fileUrl}
+                    fileName={pdf.fileName}
+                >
+                    {pdf.fileName}
+                </PdfDownloadButton>
+            ))}
+        </div>
     </div>
 );
 
