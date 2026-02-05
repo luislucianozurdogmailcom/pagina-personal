@@ -74,6 +74,12 @@ const PDFs_formularios = [
         title: "Matemática - Identidades Trigonométricas",
         fileName: "Matemática - Identidades Trigonométricas",
         fileUrl: "/Formularios/Formulario_IdentidadesTrigonometricas.pdf",
+    },
+    {
+        id: 7,
+        title: "Matemática - Derivadas",
+        fileName: "Matemática - Derivadas",
+        fileUrl: "/Formularios/Formulario_Derivadas.pdf",
     }
 ];
 
