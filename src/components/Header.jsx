@@ -24,20 +24,20 @@ const Header = () => {
                             Home
                         </a>
                         <a href="/about" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                            About me
+                            Sobre mi
                         </a>
                         <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                            Library
+                            Recursos
                         </a>
                         <a href="/tools" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                            Tools
+                            Herramientas
                         </a>
                         <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                            Contact
+                            Contacto
                         </a>
                     </nav>
                     <a href="/contact" className="text-dark hover:text-gray-300 border-2 hover:border-accent1 rounded-2xl p-2 font-sans bg-accent1 hover:bg-dark transition duration-400">
-                        Contact
+                        Contacto
                     </a>
                     <div className="md:hidden">
                         <button
@@ -68,16 +68,16 @@ const Header = () => {
                                 Home
                             </a>
                             <a href="/about" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                                About me
+                                Sobre mi
                             </a>
                             <a href="/library" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                                Library
+                                Recursos
                             </a>
                             <a href="/tools" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                                Tools
+                                Herramientas
                             </a>
                             <a href="/contact" className="text-gray-300 hover:text-accent1 text-xs font-sans">
-                                Contact
+                                Contacto
                             </a>
                         </nav>
                     </div>

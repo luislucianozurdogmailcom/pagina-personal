@@ -101,6 +101,12 @@ const PDFs_parciales = [
         title: "1er Parcial de física - Movimiento Circular - Nivel CBC",
         fileName: "1er Parcial de física - Movimiento Circular - Nivel CBC",
         fileUrl: "/Parciales/2026-02-11-Resolucion_ejercicio_parcial_movimiento_circular_variado.pdf",
+    },
+    {
+        id: 4,
+        title: "1er Parcial de física - Movimiento Circular - Nivel CBC",
+        fileName: "1er Parcial de física - Movimiento Relativo - Nivel CBC",
+        fileUrl: "/Parciales/2026-02-11-Resolucion_ejercicio_parcial_movimiento_circular_variado.pdf",
     }
 ]
 
