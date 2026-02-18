@@ -110,6 +110,17 @@ const PDFs_parciales = [
     }
 ]
 
+
+const links_recursos = [
+{
+        id: 1,
+        title: "Cálculo de caida astronauta estratósfera",
+        description: "Código en python para correr en google colab",
+        url: "https://colab.research.google.com/drive/1NLRqPJ9vwCq5LurZHQOixCSPt-YxagRb?usp=sharing", 
+        tag: "Google Colab",
+    }
+]
+
 const Labrary = () => (
     <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-900 bg-accent1 p-2 text-center ">Formularios</h1>
@@ -155,6 +166,32 @@ const Labrary = () => (
                 >
                     {pdf.fileName}
                 </PdfDownloadButton>
+            ))}
+        </div>
+
+        {/* SECCIÓN NUEVA: RECURSOS Y LINKS */}
+        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-20 text-stone-900 bg-accent1 p-2">Recursos Online</h1>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            {links_recursos.map((link) => (
+                <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group border-2 border-stone-200 rounded-xl p-6 hover:border-orange-400 transition-all duration-300 bg-accent1 shadow-sm flex flex-col justify-between"
+                >
+                    <div>
+                        <div className="flex justify-between items-start mb-4">
+                            <span className="text-[10px] font-bold uppercase tracking-wider bg-stone-100 text-stone-600 px-2 py-1 rounded">
+                                {link.tag}
+                            </span>
+                            <span className="text-orange-400 group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                        <h2 className="text-xl font-semibold text-stone-900 mb-2">{link.title}</h2>
+                        <p className="text-stone-700 text-sm font-sans">{link.description}</p>
+                    </div>
+                    <div className="mt-4 text-orange-100 font-medium text-sm">Abrir recurso</div>
+                </a>
             ))}
         </div>
     </div>

@@ -9,6 +9,10 @@ import About from './pages/About'
 import Labrary from './pages/Labrary'
 import Contact from './pages/Contact'
 import Tools from './pages/Tools'
+import ReactGA from "react-ga4";
+
+// Inicializa con tu ID de Google Analytics
+ReactGA.initialize("G-0F9V48THMZ");
 
 function App() {
   const [count, setCount] = useState(0)
