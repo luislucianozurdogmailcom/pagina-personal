@@ -3,55 +3,36 @@ import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
 
 const Graph = () => {
-  // Estado para la función y sus parámetros
+  // ... (MANTENÉ TODO TU ESTADO Y LÓGICA DE generatePlotData Y handleParamChange IGUAL) ...
   const [functionType, setFunctionType] = useState('custom');
   const [functionText, setFunctionText] = useState('x^2+sin(5*x)+1');
   const [parameters, setParameters] = useState({ a: 1, b: 0, c: 0 });
   const [range, setRange] = useState({ min: -5, max: 5 });
   const [plotData, setPlotData] = useState([]);
 
-  // Recalcular puntos cuando cambien los parámetros
   useEffect(() => {
     generatePlotData();
   }, [functionType, functionText, parameters, range]);
 
-  // Generar datos para la gráfica
   const generatePlotData = () => {
     try {
-      // Crear array de valores x
       const xValues = [];
       const step = (range.max - range.min) / 200;
       for (let x = range.min; x <= range.max; x += step) {
         xValues.push(x);
       }
-      
-      // Calcular valores y según el tipo de función
-      let yValues;
-      let displayFunction;
-      const { a, b, c } = parameters;
-      /* 
-      if (functionType === 'quadratic') {
-        yValues = xValues.map(x => a * x * x + b * x + c);
-        displayFunction = `${a}x² + ${b}x + ${c}`;
-      } else if (functionType === 'linear') {
-        yValues = xValues.map(x => b * x + c);
-        displayFunction = `${b}x + ${c}`;
-      } else {
-      */
-      // Función personalizada
-      yValues = xValues.map(x => {
+      let yValues = xValues.map(x => {
         const scope = { x };
-      return math.evaluate(functionText, scope);
+        return math.evaluate(functionText, scope);
       });
-        displayFunction = functionText;
-      //}
+      const displayFunction = functionText;
       
       setPlotData([{
         x: xValues,
         y: yValues,
         type: 'scatter',
         mode: 'lines',
-        marker: { color: '#3b82f6' },
+        line: { color: '#fb923c', width: 3 }, // Color naranja (accent1)
         name: displayFunction
       }]);
     } catch (error) {
@@ -59,147 +40,88 @@ const Graph = () => {
     }
   };
   
-  // Manejar cambios en los parámetros
   const handleParamChange = (param, value) => {
-    setParameters(prev => ({
-      ...prev,
-      [param]: parseFloat(value) || 0
-    }));
+    setParameters(prev => ({ ...prev, [param]: parseFloat(value) || 0 }));
   };
   
   return (
-    <div className="bg-stone-700 p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-stone-100 text-center">Graficador de Funciones</h2>
+    <div className="flex flex-col h-full w-full">
+      <h2 className="text-xl font-bold mb-6 text-gray-100 flex items-center">
+        <svg className="w-5 h-5 mr-2 text-accent1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+        Graficador de Funciones
+      </h2>
       
-      {/* Selector de tipo de función */}
-      {/*
-
-      <div className="mb-4">
-        <label className="block text-stone-100 mb-2">Tipo de función:</label>
-        <div className="flex space-x-4">
-          <button
-            className={`px-4 py-2 rounded transition-colors ${functionType === 'quadratic' ? 'bg-orange-400 text-white' : 'bg-stone-200'}`}
-            onClick={() => setFunctionType('quadratic')}
-          >
-            Cuadrática (ax² + bx + c)
-          </button>
-          <button
-            className={`px-4 py-2 rounded transition-colors ${functionType === 'linear' ? 'bg-orange-400 text-white' : 'bg-stone-200'}`}
-            onClick={() => setFunctionType('linear')}
-          >
-            Lineal (mx + b)
-          </button>
-          <button
-            className={`px-4 py-2 rounded transition-colors ${functionType === 'custom' ? 'bg-orange-400 text-white' : 'bg-stone-200'}`}
-            onClick={() => setFunctionType('custom')}
-          >
-            Personalizada
-          </button>
-        </div>
-      </div>
-      */}
-      
-      {/* Controles según el tipo de función */}
-      
-      {functionType === 'custom' ? (
-      
+      {/* Controles */}
+      <div className="mb-6 bg-white/5 p-4 rounded-2xl border border-white/5">
         <div className="mb-4">
-          <label className="block text-stone-100 mb-2">Función f(x) =</label>
+          <label className="block text-gray-400 text-sm mb-2 font-mono uppercase tracking-wider">Función f(x) =</label>
           <input
             type="text"
             value={functionText}
             onChange={(e) => setFunctionText(e.target.value)}
-            className="w-full text-stone-100 p-2 border rounded"
+            className="w-full bg-[#0a0a0a] text-gray-100 p-3 rounded-xl border border-white/10 focus:border-accent1 focus:ring-1 focus:ring-accent1 outline-none font-mono transition-colors"
             placeholder="Ejemplo: x^2 + sin(x)"
           />
-          <p className="text-sm text-stone-100 mt-1">
-            Usa operadores como +, -, *, /, ^ y funciones como sin(), cos(), sqrt(), etc.
-          </p>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {functionType === 'quadratic' && (
-            <div>
-              <label className="block text-stone-100 mb-1">a:</label>
-              <input
-                type="number"
-                value={parameters.a}
-                onChange={(e) => handleParamChange('a', e.target.value)}
-                className="w-full p-2 border rounded text-stone-100"
-                step="0.1"
-              />
-            </div>
-          )}
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-stone-100 mb-1">{functionType === 'quadratic' ? 'b:' : 'm:'}</label>
+            <label className="block text-gray-400 text-xs mb-1 font-mono uppercase tracking-wider">Mínimo X</label>
             <input
               type="number"
-              value={parameters.b}
-              onChange={(e) => handleParamChange('b', e.target.value)}
-              className="w-full p-2 border rounded text-stone-100"
-              step="0.1"
+              value={range.min}
+              onChange={(e) => setRange(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))}
+              className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 focus:border-accent1 outline-none font-mono text-sm"
             />
           </div>
           <div>
-            <label className="block text-stone-100 mb-1">{functionType === 'quadratic' ? 'c:' : 'b:'}</label>
+            <label className="block text-gray-400 text-xs mb-1 font-mono uppercase tracking-wider">Máximo X</label>
             <input
               type="number"
-              value={parameters.c}
-              onChange={(e) => handleParamChange('c', e.target.value)}
-              className="w-full p-2 border rounded text-stone-100"
-              step="0.1"
+              value={range.max}
+              onChange={(e) => setRange(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))}
+              className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 focus:border-accent1 outline-none font-mono text-sm"
             />
           </div>
-        </div>
-      )}
-      
-      {/* Controles de rango */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div>
-          <label className="block text-stone-100 mb-1">Mínimo X:</label>
-          <input
-            type="number"
-            value={range.min}
-            onChange={(e) => setRange(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))}
-            className="w-full p-2 border rounded text-stone-100"
-          />
-        </div>
-        <div>
-          <label className="block text-stone-100 mb-1">Máximo X:</label>
-          <input
-            type="number"
-            value={range.max}
-            onChange={(e) => setRange(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))}
-            className="w-full p-2 border rounded text-stone-100"
-          />
         </div>
       </div>
       
-      {/* Gráfico */}
-      <div className="border rounded p-2 bg-accent1">
+      {/* Gráfico Adaptado a Dark Mode */}
+      <div className="flex-grow bg-[#0a0a0a] rounded-2xl border border-white/10 p-2 overflow-hidden shadow-inner flex flex-col min-h-[300px] xl:min-h-[400px]">
         <Plot
           data={plotData}
           layout={{
-            title: `f(x) = ${functionType === 'quadratic' ? `${parameters.a}x² + ${parameters.b}x + ${parameters.c}` : 
-                   functionType === 'linear' ? `${parameters.b}x + ${parameters.c}` : 
-                   functionText}`,
-            xaxis: { title: 'x' },
-            yaxis: { title: 'f(x)' },
+            paper_bgcolor: 'transparent', // Fondo exterior transparente
+            plot_bgcolor: 'transparent',  // Fondo interior transparente
+            font: { color: '#9ca3af' },   // Textos grises
+            xaxis: { 
+                title: 'Eje X',
+                gridcolor: '#27272a',     // Cuadrícula oscura
+                zerolinecolor: '#52525b', // Línea del 0 destacada
+                zerolinewidth: 2
+            },
+            yaxis: { 
+                title: 'f(x)',
+                gridcolor: '#27272a',
+                zerolinecolor: '#52525b',
+                zerolinewidth: 2
+            },
             autosize: true,
-            height: 400,
-            margin: { l: 50, r: 50, b: 50, t: 80 }
+            margin: { l: 40, r: 20, b: 40, t: 20 }, // Márgenes reducidos
+            hovermode: 'closest'
           }}
           config={{
-            displayModeBar: true,
+            displayModeBar: false, // Ocultamos la barra superior para un look más limpio
             responsive: true
           }}
-          style={{ width: '100%' }}
+          style={{ width: '100%', height: '100%', minHeight: '300px' }}
+          useResizeHandler={true}
         />
       </div>
       
-      <div className="mt-4 text-sm text-stone-100">
-        <p>* El gráfico es interactivo: prueba a hacer zoom, pan, o guardar la imagen.</p>
-      </div>
+      <p className="mt-4 text-[10px] text-gray-500 text-center font-mono uppercase tracking-widest">
+        Interactuá con el gráfico arrastrando para hacer zoom o paneo.
+      </p>
     </div>
   );
 };

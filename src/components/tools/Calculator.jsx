@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import * as math from 'mathjs';
 
 const Calculator = () => {
+  // ... (MANTENÉ TODO TU ESTADO Y FUNCIONES LÓGICAS IGUALES HASTA handleCalculate, handleAllClear, etc) ...
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState('');
   const [history, setHistory] = useState('');
 
-  // Manejar clics en botones
   const handleButtonClick = (value) => {
-    // Lógica para encadenar operaciones con el resultado anterior
     if (result && !math.isNumeric(value) && value !== '.' && value !== ')') {
         setExpression(result + value);
         setResult('');
         setHistory(result);
     } else if (result && (math.isNumeric(value) || value === '.' || value === '(' || value === 'e' || value === 'pi')) {
-        // Si hay resultado y el usuario empieza algo nuevo, reseteamos
         setExpression(value);
         setResult('');
         setHistory('');
@@ -23,16 +21,11 @@ const Calculator = () => {
     }
   };
 
-  // Calcular resultado
   const handleCalculate = () => {
     try {
       if (!expression) return;
-      // mathjs evalúa 'log' como natural y 'log10' como base 10
       const calculated = math.evaluate(expression);
-      
-      // Formateo para evitar decimales infinitos y notación científica limpia
       const formatted = math.format(calculated, { precision: 10 });
-      
       setHistory(expression);
       setResult(String(formatted));
       setExpression(String(formatted));
@@ -42,46 +35,37 @@ const Calculator = () => {
     }
   };
 
-  // Borrar TODO (Reset total)
   const handleAllClear = () => {
     setExpression('');
     setResult('');
     setHistory('');
   };
 
-  // Borrar entrada actual (Clear Entry)
   const handleClearEntry = () => {
     setExpression('');
-    if(result) {
-        setResult('');
-    }
+    if(result) setResult('');
   };
 
-  // Borrar último caracter (Backspace)
   const handleDelete = () => {
-    if (result) {
-        handleAllClear();
-    } else {
-        setExpression((prev) => prev.slice(0, -1));
-    }
+    if (result) handleAllClear();
+    else setExpression((prev) => prev.slice(0, -1));
   };
 
-  // Componente de Botón
+  // Componente de Botón Rediseñado
   const CalcButton = ({ label, value, onClick, className = '', isOperator = false, isAction = false, isDanger = false }) => {
-    // El valor que se escribe puede ser distinto a la etiqueta (ej: etiqueta "ln" -> escribe "log(")
     const textToInsert = value !== undefined ? value : label;
 
-    let baseStyle = "p-3 sm:p-4 rounded text-lg font-semibold transition-all duration-200 active:scale-95 shadow-sm flex items-center justify-center";
+    let baseStyle = "p-3 sm:p-4 rounded-xl text-lg font-semibold transition-all duration-200 active:scale-95 flex items-center justify-center font-mono";
     let colorStyle = "";
 
     if (isOperator) {
-        colorStyle = "bg-stone-600 text-orange-400 hover:bg-stone-500 border border-stone-500";
+        colorStyle = "bg-stone-800/80 text-orange-400 hover:bg-stone-700 border border-white/5";
     } else if (isAction) {
-        colorStyle = "bg-orange-400 text-stone-900 hover:bg-orange-500 shadow-orange-400/20";
+        colorStyle = "bg-gradient-to-r from-accent1 to-orange-400 text-dark hover:shadow-[0_0_15px_rgba(251,146,60,0.4)] border-none";
     } else if (isDanger) {
-        colorStyle = "bg-red-900/40 text-red-200 hover:bg-red-900/60 border border-red-900/50";
+        colorStyle = "bg-red-900/20 text-red-400 hover:bg-red-900/40 border border-red-500/20";
     } else {
-        colorStyle = "bg-stone-800 text-stone-100 hover:bg-stone-600 border border-stone-600";
+        colorStyle = "bg-white/5 text-gray-200 hover:bg-white/10 border border-white/5";
     }
 
     return (
@@ -95,12 +79,18 @@ const Calculator = () => {
   };
 
   return (
-    <div className="bg-stone-700 p-6 rounded-lg shadow-lg h-full flex flex-col">
-      <h2 className="text-2xl font-bold mb-4 text-stone-100 text-center">Calculadora</h2>
+    <div className="flex flex-col h-full w-full max-w-md mx-auto">
+      <h2 className="text-xl font-bold mb-6 text-gray-100 flex items-center">
+        <svg className="w-5 h-5 mr-2 text-accent1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+        Calculadora Científica
+      </h2>
 
-      {/* Pantalla */}
-      <div className="bg-stone-800 p-4 rounded-lg border border-stone-600 mb-4 flex flex-col justify-end h-32 shadow-inner">
-        <div className="text-stone-400 text-sm text-right h-6 overflow-hidden truncate">
+      {/* Pantalla (Estilo LCD oscuro) */}
+      <div className="bg-[#0a0a0a] p-5 rounded-2xl border border-white/10 mb-6 flex flex-col justify-end h-32 shadow-inner relative overflow-hidden">
+        {/* Reflejo sutil */}
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-white/[0.02] pointer-events-none rounded-t-2xl"></div>
+        
+        <div className="text-accent1/60 text-sm text-right h-6 overflow-hidden truncate font-mono tracking-wider">
           {history}
         </div>
         <input
@@ -111,58 +101,50 @@ const Calculator = () => {
                 if(e.key === 'Enter') handleCalculate();
                 if(e.key === 'Escape') handleClearEntry();
             }}
-            className="bg-transparent text-right text-3xl text-stone-100 w-full focus:outline-none font-mono"
+            className="bg-transparent text-right text-4xl text-gray-100 w-full focus:outline-none font-mono tracking-wider mt-2"
             placeholder="0"
         />
       </div>
 
-      {/* Teclado - Grid ajustado */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3 flex-grow select-none">
-        
-        {/* Fila Edición y Limpieza */}
+      {/* Teclado */}
+      <div className="grid grid-cols-4 gap-3 flex-grow select-none">
         <CalcButton label="AC" onClick={handleAllClear} isDanger />
-        <CalcButton label="C" onClick={handleClearEntry} isDanger className="text-sm" /> {/* Borra input actual */}
-        <CalcButton label="DEL" onClick={handleDelete} className="bg-stone-600 text-stone-200" />
+        <CalcButton label="C" onClick={handleClearEntry} isDanger className="text-sm" />
+        <CalcButton label="DEL" onClick={handleDelete} className="bg-stone-800/80 text-gray-400 border border-white/5" />
         <CalcButton label="/" isOperator />
 
-        {/* Fila Científica 1: Constantes y Exponentes */}
         <CalcButton label="(" isOperator />
         <CalcButton label=")" isOperator />
         <CalcButton label="^" isOperator />
         <CalcButton label="sqrt" value="sqrt(" isOperator />
 
-        {/* Fila Científica 2: Trigonometría y Logaritmos */}
         <CalcButton label="sin" value="sin(" isOperator />
         <CalcButton label="cos" value="cos(" isOperator />
-        <CalcButton label="ln" value="log(" isOperator /> {/* log() en mathjs es base e */}
-        <CalcButton label="log" value="log10(" isOperator /> {/* log10 explícito */}
+        <CalcButton label="ln" value="log(" isOperator />
+        <CalcButton label="log" value="log10(" isOperator />
 
-        {/* Fila 7-8-9 * */}
         <CalcButton label="7" />
         <CalcButton label="8" />
         <CalcButton label="9" />
         <CalcButton label="*" isOperator />
 
-        {/* Fila 4-5-6 - */}
         <CalcButton label="4" />
         <CalcButton label="5" />
         <CalcButton label="6" />
         <CalcButton label="-" isOperator />
 
-        {/* Fila 1-2-3 + */}
         <CalcButton label="1" />
         <CalcButton label="2" />
         <CalcButton label="3" />
         <CalcButton label="+" isOperator />
 
-        {/* Fila 0 . = */}
         <CalcButton label="e" isOperator className="font-serif italic" />
         <CalcButton label="0" />
         <CalcButton label="." />
         <CalcButton label="=" onClick={handleCalculate} isAction />
       </div>
       
-      <div className="mt-4 text-xs text-stone-400 text-center flex justify-between px-2">
+      <div className="mt-6 text-[10px] text-gray-500 flex justify-between px-2 font-mono uppercase tracking-widest">
          <span>ln = log base e</span>
          <span>log = log base 10</span>
       </div>
