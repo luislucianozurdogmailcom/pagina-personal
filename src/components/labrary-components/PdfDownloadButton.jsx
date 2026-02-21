@@ -2,18 +2,16 @@ import React from "react";
 import { FaDownload } from "react-icons/fa6";
 
 const PdfDownloadButton = ({ fileUrl, fileName = "documento.pdf", children }) => {
-  // Parámetros recibidos:
-  // - fileUrl: URL del archivo PDF a descargar (obligatorio)
-  // - fileName: Nombre con el que se descargará el archivo (opcional, por defecto "documento.pdf")
-  // - children: Contenido opcional a mostrar dentro del botón (opcional)
   return (
     <a
       href={fileUrl}
       download={fileName}
-      className="flex flex-col justify-center items-center px-4 py-2 bg-accent1 text-stone-700 hover:text-stone-100 rounded hover:bg-accent2 transition-all duration-300 shadow-lg hover:shadow-accent1 font-semibold text-center"
+      className="group flex items-center justify-center w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-xl hover:bg-accent1 hover:border-accent1 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(251,146,60,0.3)]"
     >
-      <FaDownload className="text-3xl mb-5" />
-      {children || "Descargar PDF"}
+      <FaDownload className="text-lg text-accent1 group-hover:text-dark transition-colors mr-3" />
+      <span className="font-semibold text-gray-300 group-hover:text-dark transition-colors text-sm">
+        {children || "Descargar PDF"}
+      </span>
     </a>
   );
 };

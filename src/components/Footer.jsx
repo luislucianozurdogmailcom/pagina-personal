@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from 'react-icons/fa'; // Sumé FaInstagram
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -59,6 +59,10 @@ const Footer = () => {
               Seguime en mis redes para ver más proyectos, recursos y novedades.
             </p>
             <div className="flex space-x-4 pt-2">
+              <a href="https://www.instagram.com/luislucianozurdo/" target="_blank" rel="noopener noreferrer" 
+                 className="p-3 bg-white/5 text-gray-300 rounded-xl hover:bg-accent1 hover:text-dark hover:-translate-y-1 hover:shadow-lg hover:shadow-accent1/30 transition-all duration-300">
+                <FaInstagram className="text-xl" />
+              </a>
               <a href="https://github.com/luislucianozurdogmailcom" target="_blank" rel="noopener noreferrer" 
                  className="p-3 bg-white/5 text-gray-300 rounded-xl hover:bg-accent1 hover:text-dark hover:-translate-y-1 hover:shadow-lg hover:shadow-accent1/30 transition-all duration-300">
                 <FaGithub className="text-xl" />

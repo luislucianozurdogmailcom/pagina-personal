@@ -3,7 +3,7 @@ import React from "react";
 const WhatsAppButton = () => {
     // Reemplazá este número por el tuyo. 
     // Debe tener el código de país (ej: 54 para Argentina), código de área (ej: 911), sin el símbolo "+" ni espacios.
-    const phoneNumber = "+541135621000"; 
+    const phoneNumber = "+5491135621000"; 
     
     // Mensaje predeterminado con el que te van a escribir
     const message = "¡Hola! Vengo de llzhelp.site y me gustaría consultarte por las clases particulares.";

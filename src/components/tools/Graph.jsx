@@ -3,7 +3,6 @@ import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
 
 const Graph = () => {
-  // ... (MANTENÉ TODO TU ESTADO Y LÓGICA DE generatePlotData Y handleParamChange IGUAL) ...
   const [functionType, setFunctionType] = useState('custom');
   const [functionText, setFunctionText] = useState('x^2+sin(5*x)+1');
   const [parameters, setParameters] = useState({ a: 1, b: 0, c: 0 });
@@ -16,6 +15,14 @@ const Graph = () => {
 
   const generatePlotData = () => {
     try {
+      // --- SOLUCIÓN DEL BUG ---
+      // Si el rango está vacío o es inválido (max menor o igual a min),
+      // no dibujamos nada para evitar un bucle infinito (step = 0).
+      if (range.max <= range.min) {
+          setPlotData([]); 
+          return; 
+      }
+
       const xValues = [];
       const step = (range.max - range.min) / 200;
       for (let x = range.min; x <= range.max; x += step) {
@@ -32,7 +39,7 @@ const Graph = () => {
         y: yValues,
         type: 'scatter',
         mode: 'lines',
-        line: { color: '#fb923c', width: 3 }, // Color naranja (accent1)
+        line: { color: '#fb923c', width: 3 }, 
         name: displayFunction
       }]);
     } catch (error) {
@@ -51,7 +58,6 @@ const Graph = () => {
         Graficador de Funciones
       </h2>
       
-      {/* Controles */}
       <div className="mb-6 bg-white/5 p-4 rounded-2xl border border-white/5">
         <div className="mb-4">
           <label className="block text-gray-400 text-sm mb-2 font-mono uppercase tracking-wider">Función f(x) =</label>
@@ -70,7 +76,8 @@ const Graph = () => {
             <input
               type="number"
               value={range.min}
-              onChange={(e) => setRange(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))}
+              // Mejoramos el onChange para que no salte a 0 apenas borrás el número
+              onChange={(e) => setRange(prev => ({ ...prev, min: e.target.value === '' ? '' : parseFloat(e.target.value) }))}
               className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 focus:border-accent1 outline-none font-mono text-sm"
             />
           </div>
@@ -79,25 +86,24 @@ const Graph = () => {
             <input
               type="number"
               value={range.max}
-              onChange={(e) => setRange(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))}
+              onChange={(e) => setRange(prev => ({ ...prev, max: e.target.value === '' ? '' : parseFloat(e.target.value) }))}
               className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 focus:border-accent1 outline-none font-mono text-sm"
             />
           </div>
         </div>
       </div>
       
-      {/* Gráfico Adaptado a Dark Mode */}
       <div className="flex-grow bg-[#0a0a0a] rounded-2xl border border-white/10 p-2 overflow-hidden shadow-inner flex flex-col min-h-[300px] xl:min-h-[400px]">
         <Plot
           data={plotData}
           layout={{
-            paper_bgcolor: 'transparent', // Fondo exterior transparente
-            plot_bgcolor: 'transparent',  // Fondo interior transparente
-            font: { color: '#9ca3af' },   // Textos grises
+            paper_bgcolor: 'transparent',
+            plot_bgcolor: 'transparent', 
+            font: { color: '#9ca3af' }, 
             xaxis: { 
                 title: 'Eje X',
-                gridcolor: '#27272a',     // Cuadrícula oscura
-                zerolinecolor: '#52525b', // Línea del 0 destacada
+                gridcolor: '#27272a',    
+                zerolinecolor: '#52525b', 
                 zerolinewidth: 2
             },
             yaxis: { 
@@ -107,11 +113,11 @@ const Graph = () => {
                 zerolinewidth: 2
             },
             autosize: true,
-            margin: { l: 40, r: 20, b: 40, t: 20 }, // Márgenes reducidos
+            margin: { l: 40, r: 20, b: 40, t: 20 },
             hovermode: 'closest'
           }}
           config={{
-            displayModeBar: false, // Ocultamos la barra superior para un look más limpio
+            displayModeBar: false,
             responsive: true
           }}
           style={{ width: '100%', height: '100%', minHeight: '300px' }}

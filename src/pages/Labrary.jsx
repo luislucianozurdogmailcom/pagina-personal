@@ -1,42 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import PdfDownloadButton from "../components/labrary-components/PdfDownloadButton";
-
-/*const videos = [
-    {
-        id: 1,
-        title: "Segunda Ley de Newton - Fuerzas y Movimiento",
-        description: "Aprende sobre la segunda ley de Newton y su aplicación en la física.",
-        thumbnail: "https://img.youtube.com/vi/dGcsHMXbSOA/hqdefault.jpg",
-        url: "https://www.youtube.com/watch?v=dGcsHMXbSOA",
-        tag: "Física",
-    },
-    {
-        id: 2,
-        title: "Como descomponer fuerzas",
-        description: "Aprende a descomponer fuerzas en sus coordenadas 'x' e 'y'",
-        thumbnail: "https://img.youtube.com/vi/UBOj6rqRUME/hqdefault.jpg",
-        url: "https://www.youtube.com/watch?v=UBOj6rqRUME",
-        tag: "Física",
-    },
-    {
-        id: 3,
-        title: "Ecuaciones Horarias (MRU)",
-        description: "Aprende la teoria detras de las ecuaciones horarias del movimiento rectilineo uniforme.",
-        thumbnail: "https://img.youtube.com/vi/f687hBjwFcM/hqdefault.jpg",
-        url: "https://www.youtube.com/watch?v=f687hBjwFcM",
-        tag: "Física",
-    },
-    {
-        id: 4,
-        title: "Ecuaciones Horarias (MRUV)",
-        description: "Aprende la teoria detras de las ecuaciones horarias del movimiento rectilineo uniformemente variado.",
-        thumbnail: "https://img.youtube.com/vi/f687hBjwFcM/hqdefault.jpg",
-        url: "https://www.youtube.com/watch?v=f687hBjwFcM",
-        tag: "Física",
-    }
-    // Agrega más videos aquí si lo deseas
-];*/
+import { FiFileText, FiBookOpen, FiExternalLink } from "react-icons/fi";
 
 const PDFs_formularios = [
     {
@@ -98,103 +62,163 @@ const PDFs_parciales = [
     },
     {
         id: 3,
-        title: "1er Parcial de física - Movimiento Circular - Nivel CBC",
+        title: "1er Parcial de física - Movimiento Circular",
         fileName: "1er Parcial de física - Movimiento Circular - Nivel CBC",
         fileUrl: "/Parciales/2026-02-11-Resolucion_ejercicio_parcial_movimiento_circular_variado.pdf",
     },
     {
         id: 4,
-        title: "1er Parcial de física - Movimiento Circular - Nivel CBC",
+        title: "1er Parcial de física - Movimiento Relativo",
         fileName: "1er Parcial de física - Movimiento Relativo - Nivel CBC",
         fileUrl: "/Parciales/2026-02-11-Resolucion_ejercicio_parcial_movimiento_circular_variado.pdf",
     }
-]
-
+];
 
 const links_recursos = [
-{
+    {
         id: 1,
-        title: "Cálculo de caida astronauta estratósfera",
+        title: "Cálculo de caída astronauta estratósfera",
         description: "Código en python para correr en google colab",
         url: "https://colab.research.google.com/drive/1NLRqPJ9vwCq5LurZHQOixCSPt-YxagRb?usp=sharing", 
         tag: "Google Colab",
     }
-]
+];
 
-const Labrary = () => (
-    <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-900 bg-accent1 p-2 text-center ">Formularios</h1>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {/*videos.map((video) => (
-                <a
-                    key={video.id}
-                    href={video.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-accent1 rounded-lg shadow hover:shadow-xl shadow-orange-400 transition-shadow duration-200 overflow-hidden flex flex-col"
-                >
-                    <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="w-full h-48 object-cover"
-                    />
-                    <div className="text-stone-100 rounded-2xl bg-stone-700 mx-auto p-2 mt-2">{video.tag}</div>
-                    <div className="p-4 flex-1 flex flex-col">
-                        <h2 className="text-xl text-center font-semibold font-sans text-stone-800 mb-2">{video.title}</h2>
-                        <p className="text-stone-600 text-sm font-sans flex-1 text-center">{video.description}</p>
+const Labrary = () => {
+    const animationStyles = `
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) translateX(8px) rotate(2deg); }
+            66% { transform: translateY(10px) translateX(-8px) rotate(-2deg); }
+            100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        }
+        .animate-float-slow { animation: float 8s ease-in-out infinite; }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+
+    return (
+        <section className="relative w-full min-h-screen bg-dark py-20 overflow-hidden">
+            <style>{animationStyles}</style>
+
+            {/* Fondos Decorativos */}
+            <div className="absolute top-40 right-10 w-72 h-72 bg-accent1/10 rounded-full mix-blend-screen blur-[100px] animate-float-slow pointer-events-none"></div>
+            <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-400/5 rounded-full mix-blend-screen blur-[120px] pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-10">
+                
+                {/* Encabezado Principal */}
+                <div className="text-center mb-16 fade-in-up" style={{ animationDelay: '0.1s' }}>
+                    <h2 className="text-accent1 text-sm font-bold uppercase tracking-widest mb-2">Material de Estudio</h2>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-100 leading-tight">
+                        Tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent1 to-orange-300">Biblioteca</span>
+                    </h1>
+                    <p className="text-gray-400 font-sans mt-4 max-w-2xl mx-auto">
+                        Descargá formularios, resoluciones de parciales y accedé a recursos online gratuitos para potenciar tu aprendizaje.
+                    </p>
+                </div>
+
+                {/* SECCIÓN 1: Formularios */}
+                <div className="mb-16 fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    <div className="flex items-center mb-8">
+                        <div className="w-8 h-1 bg-accent1 rounded-full mr-4"></div>
+                        <h3 className="text-2xl font-bold text-gray-100">Formularios y Resúmenes</h3>
                     </div>
-                </a>
-            ))*/}
-            {PDFs_formularios.map((pdf) => (
-                <PdfDownloadButton 
-                    key={pdf.id}
-                    fileUrl={pdf.fileUrl}
-                    fileName={pdf.fileName}
-                >
-                    {pdf.fileName}
-                </PdfDownloadButton>
-            ))}
-        </div>
-
-        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-15 text-stone-900 bg-accent1 p-2 text-center ">Parciales Resueltos</h1>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {PDFs_parciales.map((pdf) => (
-                <PdfDownloadButton 
-                    key={pdf.id}
-                    fileUrl={pdf.fileUrl}
-                    fileName={pdf.fileName}
-                >
-                    {pdf.fileName}
-                </PdfDownloadButton>
-            ))}
-        </div>
-
-        {/* SECCIÓN NUEVA: RECURSOS Y LINKS */}
-        <h1 className="text-4xl font-extralight font-sans mb-8 text-center mt-20 text-stone-900 bg-accent1 p-2">Recursos Online</h1>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {links_recursos.map((link) => (
-                <a
-                    key={link.id}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group border-2 border-stone-200 rounded-xl p-6 hover:border-orange-400 transition-all duration-300 bg-accent1 shadow-sm flex flex-col justify-between"
-                >
-                    <div>
-                        <div className="flex justify-between items-start mb-4">
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-stone-100 text-stone-600 px-2 py-1 rounded">
-                                {link.tag}
-                            </span>
-                            <span className="text-orange-400 group-hover:translate-x-1 transition-transform">→</span>
-                        </div>
-                        <h2 className="text-xl font-semibold text-stone-900 mb-2">{link.title}</h2>
-                        <p className="text-stone-700 text-sm font-sans">{link.description}</p>
+                    
+                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {PDFs_formularios.map((pdf) => (
+                            <div key={pdf.id} className="group bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:bg-white/10 hover:border-accent1/50 transition-all duration-300 shadow-lg flex flex-col justify-between">
+                                <div>
+                                    <div className="w-12 h-12 mb-4 bg-accent1/10 rounded-xl flex items-center justify-center text-accent1 group-hover:bg-accent1 group-hover:text-dark transition-colors duration-300 shadow-[0_0_15px_rgba(251,146,60,0.1)] group-hover:shadow-[0_0_20px_rgba(251,146,60,0.4)]">
+                                        <FiBookOpen className="text-2xl" />
+                                    </div>
+                                    <h4 className="text-lg font-bold text-gray-200 mb-2 leading-tight">{pdf.title}</h4>
+                                    <p className="text-xs text-gray-500 font-mono mb-6 truncate" title={pdf.fileName}>{pdf.fileName}</p>
+                                </div>
+                                <div className="mt-auto">
+                                    {/* El componente PdfDownloadButton maneja su propio renderizado, lo envolvemos para mantener la estructura */}
+                                    <PdfDownloadButton fileUrl={pdf.fileUrl} fileName={pdf.fileName}>
+                                        <span className="font-semibold text-sm">Descargar PDF</span>
+                                    </PdfDownloadButton>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <div className="mt-4 text-orange-100 font-medium text-sm">Abrir recurso</div>
-                </a>
-            ))}
-        </div>
-    </div>
-);
+                </div>
+
+                {/* SECCIÓN 2: Parciales Resueltos */}
+                <div className="mb-16 fade-in-up" style={{ animationDelay: '0.3s' }}>
+                    <div className="flex items-center mb-8">
+                        <div className="w-8 h-1 bg-accent1 rounded-full mr-4"></div>
+                        <h3 className="text-2xl font-bold text-gray-100">Parciales Resueltos</h3>
+                    </div>
+
+                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {PDFs_parciales.map((pdf) => (
+                            <div key={pdf.id} className="group bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:bg-white/10 hover:border-accent1/50 transition-all duration-300 shadow-lg flex flex-col justify-between">
+                                <div>
+                                    <div className="w-12 h-12 mb-4 bg-accent1/10 rounded-xl flex items-center justify-center text-accent1 group-hover:bg-accent1 group-hover:text-dark transition-colors duration-300 shadow-[0_0_15px_rgba(251,146,60,0.1)] group-hover:shadow-[0_0_20px_rgba(251,146,60,0.4)]">
+                                        <FiFileText className="text-2xl" />
+                                    </div>
+                                    <h4 className="text-lg font-bold text-gray-200 mb-2 leading-tight">{pdf.title}</h4>
+                                    <p className="text-xs text-gray-500 font-mono mb-6 truncate" title={pdf.fileName}>{pdf.fileName}</p>
+                                </div>
+                                <div className="mt-auto">
+                                    <PdfDownloadButton fileUrl={pdf.fileUrl} fileName={pdf.fileName}>
+                                        <span className="font-semibold text-sm">Descargar PDF</span>
+                                    </PdfDownloadButton>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* SECCIÓN 3: Recursos Online */}
+                <div className="fade-in-up" style={{ animationDelay: '0.4s' }}>
+                    <div className="flex items-center mb-8">
+                        <div className="w-8 h-1 bg-accent1 rounded-full mr-4"></div>
+                        <h3 className="text-2xl font-bold text-gray-100">Recursos Online</h3>
+                    </div>
+
+                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {links_recursos.map((link) => (
+                            <a
+                                key={link.id}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 hover:border-accent1/50 transition-all duration-300 hover:-translate-y-1 shadow-lg flex flex-col justify-between"
+                            >
+                                <div>
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="w-12 h-12 bg-accent1/10 rounded-xl flex items-center justify-center text-accent1 group-hover:bg-accent1 group-hover:text-dark transition-colors duration-300 shadow-[0_0_15px_rgba(251,146,60,0.1)] group-hover:shadow-[0_0_20px_rgba(251,146,60,0.4)]">
+                                            <FiExternalLink className="text-2xl" />
+                                        </div>
+                                        <span className="text-[10px] font-bold uppercase tracking-wider bg-white/10 border border-white/20 text-gray-300 px-3 py-1.5 rounded-full">
+                                            {link.tag}
+                                        </span>
+                                    </div>
+                                    <h4 className="text-xl font-semibold text-gray-100 mb-3 group-hover:text-accent1 transition-colors">{link.title}</h4>
+                                    <p className="text-gray-400 text-sm font-sans mb-4">{link.description}</p>
+                                </div>
+                                <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-accent1 font-medium text-sm">
+                                    <span>Abrir recurso</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    );
+};
 
 export default Labrary;

@@ -3,7 +3,6 @@ import Plot from 'react-plotly.js';
 import * as math from 'mathjs';
 
 const Graph3D = () => {
-  // Función inicial: una onda amortiguada que queda hermosa en 3D
   const [functionText, setFunctionText] = useState('sin(sqrt(x^2 + y^2))');
   const [rangeX, setRangeX] = useState({ min: -10, max: 10 });
   const [rangeY, setRangeY] = useState({ min: -10, max: 10 });
@@ -15,7 +14,14 @@ const Graph3D = () => {
 
   const generatePlotData = () => {
     try {
-      const steps = 40; // Resolución de la malla (40x40 puntos). Cuidado con subirlo mucho porque consume RAM.
+      // --- SOLUCIÓN DEL BUG ---
+      // Si alguno de los rangos es 0, negativo o inválido, evitamos el bucle infinito.
+      if (rangeX.max <= rangeX.min || rangeY.max <= rangeY.min) {
+          setPlotData([]);
+          return;
+      }
+
+      const steps = 40; 
       const xValues = [];
       const yValues = [];
       const zValues = [];
@@ -30,12 +36,10 @@ const Graph3D = () => {
         yValues.push(y);
       }
 
-      // Plotly 3D Surface requiere Z como una matriz 2D
       for (let i = 0; i < yValues.length; i++) {
         const zRow = [];
         for (let j = 0; j < xValues.length; j++) {
           const scope = { x: xValues[j], y: yValues[i] };
-          // Evaluamos f(x, y)
           zRow.push(math.evaluate(functionText, scope));
         }
         zValues.push(zRow);
@@ -46,8 +50,8 @@ const Graph3D = () => {
         x: xValues,
         y: yValues,
         type: 'surface',
-        colorscale: 'Oranges', // Mantenemos tu color principal
-        showscale: false, // Ocultamos la barra lateral de color para que quede más limpio
+        colorscale: 'Oranges', 
+        showscale: false, 
         contours: {
             z: { show: true, usecolormap: true, highlightcolor: "#ffffff", project: { z: true } }
         }
@@ -60,14 +64,12 @@ const Graph3D = () => {
   return (
     <div className="flex flex-col h-full w-full">
       <h2 className="text-xl font-bold mb-6 text-gray-100 flex items-center">
-        {/* Ícono de cubo 3D */}
         <svg className="w-5 h-5 mr-2 text-accent1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
         </svg>
         Graficador 3D (Superficies)
       </h2>
       
-      {/* Controles de la función */}
       <div className="mb-6 bg-white/5 p-4 rounded-2xl border border-white/5 flex flex-col md:flex-row gap-4 items-center">
         <div className="w-full md:w-1/2">
           <label className="block text-gray-400 text-sm mb-2 font-mono uppercase tracking-wider">Función f(x, y) =</label>
@@ -84,21 +86,20 @@ const Graph3D = () => {
             <div>
                 <label className="block text-gray-400 text-[10px] mb-1 font-mono uppercase tracking-wider">Rango X (Min / Max)</label>
                 <div className="flex space-x-2">
-                    <input type="number" value={rangeX.min} onChange={(e) => setRangeX(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
-                    <input type="number" value={rangeX.max} onChange={(e) => setRangeX(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
+                    <input type="number" value={rangeX.min} onChange={(e) => setRangeX(prev => ({ ...prev, min: e.target.value === '' ? '' : parseFloat(e.target.value) }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
+                    <input type="number" value={rangeX.max} onChange={(e) => setRangeX(prev => ({ ...prev, max: e.target.value === '' ? '' : parseFloat(e.target.value) }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
                 </div>
             </div>
             <div>
                 <label className="block text-gray-400 text-[10px] mb-1 font-mono uppercase tracking-wider">Rango Y (Min / Max)</label>
                 <div className="flex space-x-2">
-                    <input type="number" value={rangeY.min} onChange={(e) => setRangeY(prev => ({ ...prev, min: parseFloat(e.target.value) || 0 }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
-                    <input type="number" value={rangeY.max} onChange={(e) => setRangeY(prev => ({ ...prev, max: parseFloat(e.target.value) || 0 }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
+                    <input type="number" value={rangeY.min} onChange={(e) => setRangeY(prev => ({ ...prev, min: e.target.value === '' ? '' : parseFloat(e.target.value) }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
+                    <input type="number" value={rangeY.max} onChange={(e) => setRangeY(prev => ({ ...prev, max: e.target.value === '' ? '' : parseFloat(e.target.value) }))} className="w-full bg-[#0a0a0a] text-gray-100 p-2.5 rounded-lg border border-white/10 outline-none font-mono text-sm" />
                 </div>
             </div>
         </div>
       </div>
       
-      {/* Canvas del Gráfico 3D */}
       <div className="flex-grow bg-[#0a0a0a] rounded-2xl border border-white/10 p-2 overflow-hidden shadow-inner flex flex-col min-h-[400px] xl:min-h-[500px]">
         <Plot
           data={plotData}
